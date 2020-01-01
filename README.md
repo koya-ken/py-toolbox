@@ -1,3 +1,9 @@
+# how to install
+
+```shell
+pip install git+https://github.com/koya-ken/py-toolbox.git
+```
+
 # examples
 
 ## change working directory
