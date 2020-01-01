@@ -1,0 +1,31 @@
+root = true
+
+
+[*]
+indent_style = space
+indent_size = 4
+
+# We recommend you to keep these unchanged
+# 改行コード
+end_of_line = lf
+# latin1 | utf-8 | utf-8-bom | utf-16be | utf-16le
+charset = utf-8
+# 行末空白
+trim_trailing_whitespace = true
+# 最終空行
+insert_final_newline = true
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{bat,cmd,cmd.*}]
+end_of_line = crlf
+indent_style = space
+
+[*.{ps1,ps1.*}]
+end_of_line = crlf
+indent_style = space
