@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm
 
 
-def copyfileobj(fromfile, tofile, callback, length=16*1024, overwrite=False):
+def copyfileobj(fromfile, tofile, callback=None, length=16*1024, overwrite=False):
     copied = 0
 
     if os.path.isdir(tofile):
@@ -23,7 +23,8 @@ def copyfileobj(fromfile, tofile, callback, length=16*1024, overwrite=False):
                 break
             fdst.write(buf)
             copied = len(buf)
-            callback(copied)
+            if callback is not None:
+                callback(copied)
 
 
 def copyfileprogress(fromfile, tofile, length=16*1024, overwrite=False, showmessage=True):
