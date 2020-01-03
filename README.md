@@ -13,6 +13,9 @@ from py_toolbox import *
 
 with dir('path_to_working_dir') :
     process on working dir
+
+pushd('path_to_working_dir')
+popd()
 ```
 
 ## copy file with progress

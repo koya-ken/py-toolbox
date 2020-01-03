@@ -34,6 +34,7 @@ def mkdir(path):
 
 def pushd(path):
     dir_stack.append(os.getcwd())
+    mkdir(path)
     os.chdir(path)
 
 
