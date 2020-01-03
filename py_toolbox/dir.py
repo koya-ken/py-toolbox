@@ -1,5 +1,7 @@
 import os
 
+dir_stack = []
+
 
 class dir(object):
     def __init__(self, path):
@@ -28,3 +30,13 @@ def mkdir(path):
     """
     if not os.path.exists(path):
         os.makedirs(path)
+
+
+def pushd(path):
+    dir_stack.append(os.getcwd())
+    os.chdir(path)
+
+
+def popd():
+    if len(dir_stack):
+        os.chdir(dir_stack.pop())

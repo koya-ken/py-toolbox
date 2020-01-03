@@ -9,7 +9,7 @@ pip install git+https://github.com/koya-ken/py-toolbox.git
 ## change working directory
 
 ```python
-from py-toolbox import *
+from py_toolbox import *
 
 with dir('path_to_working_dir') :
     process on working dir
@@ -18,7 +18,7 @@ with dir('path_to_working_dir') :
 ## copy file with progress
 
 ```python
-from py-toolbox import *
+from py_toolbox import *
 copyfileprogress(fromfile, tofile)
 ```
 
@@ -30,4 +30,13 @@ from py_toolbox import *
 saveurlcontentprogress(url, '.')
 # without progress
 # saveurlcontent(url, '.')
+```
+
+## excec command for windows
+
+```python
+from py_toolbox import *
+
+# like bat script
+cmd(command)
 ```
