@@ -2,8 +2,15 @@ import os
 from urllib import request
 from tqdm import tqdm
 
+CHROME_USERAGENT = r"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
 
-def saveurlcontent(url, savepath, callback=None, overwrite=False, buffersize=8192, useragent="Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"):
+def gethtml(url,useragent=CHROME_USERAGENT,encoding="utf-8"):
+    headers = {"User-Agent": useragent }
+    req = request.Request(url, None, headers)
+    data = request.urlopen(req)
+    return data.read().decode(encoding)
+
+def saveurlcontent(url, savepath, callback=None, overwrite=False, buffersize=8192, useragent=CHROME_USERAGENT):
     if os.path.isdir(savepath):
         savepath = os.path.join(savepath, os.path.basename(url))
 
@@ -31,7 +38,7 @@ def savereqcontent(req, savepath, callback=None, overwrite=False, buffersize=819
                 callback(copied)
 
 
-def saveurlcontentprogress(url, savepath, overwrite=False, buffersize=8192, useragent="Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"):
+def saveurlcontentprogress(url, savepath, overwrite=False, buffersize=8192, useragent=CHROME_USERAGENT):
     if os.path.isdir(savepath):
         savepath = os.path.join(savepath, os.path.basename(url))
 
