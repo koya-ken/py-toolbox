@@ -4,11 +4,13 @@ from tqdm import tqdm
 
 CHROME_USERAGENT = r"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
 
-def gethtml(url,useragent=CHROME_USERAGENT,encoding="utf-8"):
-    headers = {"User-Agent": useragent }
+
+def gethtml(url, useragent=CHROME_USERAGENT, encoding="utf-8"):
+    headers = {"User-Agent": useragent}
     req = request.Request(url, None, headers)
     data = request.urlopen(req)
     return data.read().decode(encoding)
+
 
 def saveurlcontent(url, savepath, callback=None, overwrite=False, buffersize=8192, useragent=CHROME_USERAGENT):
     if os.path.isdir(savepath):
@@ -35,7 +37,9 @@ def savereqcontent(req, savepath, callback=None, overwrite=False, buffersize=819
             fdst.write(buf)
             copied = len(buf)
             if callback is not None:
-                callback(copied)
+                callback(copied, False)
+    if callback is not None:
+        callback(copied, True)
 
 
 def saveurlcontentprogress(url, savepath, overwrite=False, buffersize=8192, useragent=CHROME_USERAGENT):
@@ -49,5 +53,5 @@ def saveurlcontentprogress(url, savepath, overwrite=False, buffersize=8192, user
     req = request.Request(url, None, headers)
     conetnt = request.urlopen(req)
     size = int(conetnt.getheader('Content-Length'))
-    progress = tqdm(total=size)
-    return savereqcontent(req, savepath, lambda x: progress.update(x), overwrite, buffersize)
+    progress = tqdm(total=size, position=0)
+    return savereqcontent(req, savepath, lambda x, done: progress.update(x) if not done else progress.close(), overwrite, buffersize)
